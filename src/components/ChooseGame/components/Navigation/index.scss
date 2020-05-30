@@ -1,0 +1,10 @@
+.navigation-container {
+    display: flex;
+    justify-content: space-around;
+    height: 100px;
+    margin-top: 10px;
+    border: 1px solid black;
+    div {
+        margin-top: 30px;
+    }
+}
