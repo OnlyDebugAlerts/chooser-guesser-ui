@@ -1,6 +1,22 @@
 import React from "react";
-import AuthForm from './components/AuthForm';
+import {useDispatch} from "react-redux";
 
-export default () => <AuthForm type="Sign Up"/>
+import AuthForm from './components/AuthForm';
+import {signUp} from "../../actions/user";
+
+export default () => {
+  const dispatch = useDispatch();
+  const onSubmit = (data) => {
+    console.log(data);
+    dispatch(signUp(data));
+  };
+
+  return (
+    <AuthForm
+      type="Sign Up"
+      onSubmit={onSubmit}
+    />
+  )
+}
 
 

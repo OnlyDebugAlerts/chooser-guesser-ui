@@ -7,14 +7,12 @@ import Navigation from "./components/Navigation";
 const ChooseGame = () => {
   return (
     <div className="container">
-      <div>pidor</div>
       <Header/>
       <Categories/>
       <Comments/>
       <Navigation/>
     </div>
   )
-
 };
 
 export default ChooseGame;

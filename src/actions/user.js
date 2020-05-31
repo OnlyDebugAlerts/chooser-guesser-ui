@@ -1,7 +1,19 @@
 import axios from 'axios';
-import {SET_USER_IP} from '../constants/actions';
+import {SIGN_IN, SIGN_UP} from '../constants/actions';
 
-export const setUserIp = () => async dispatch => {
-  const {data} = await axios.get('https://jsonip.com');
-  dispatch({type: SET_USER_IP, payload: data.ip})
+axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
+
+export const signUp = formData => async dispatch => {
+  const {data} = await axios.post('auth/registration', formData);
+  dispatch({type: SIGN_UP, payload: data})
+};
+
+export const signIn = (formData, history) => async dispatch => {
+  const {data} = await axios.post('auth/login', formData);
+  console.log(data)
+  if (!data.access_token) return;
+  localStorage.setItem('jwt', data.access_token);
+  history.push('/navigation');
+
+  dispatch({type: SIGN_IN, payload: data})
 };

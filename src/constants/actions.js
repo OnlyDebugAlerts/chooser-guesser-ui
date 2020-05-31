@@ -1,1 +1,2 @@
-export const SET_USER_IP = 'SET_USER_IP'; 
+export const SIGN_IN = 'SIGN_IN';
+export const SIGN_UP = 'SIGN_UP';

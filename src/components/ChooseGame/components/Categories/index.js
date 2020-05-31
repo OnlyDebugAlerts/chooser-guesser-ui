@@ -1,16 +1,10 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 
 import './index.scss';
 import CategoryItem from './categoty-item';
-import {useDispatch} from 'react-redux';
-import {setUserIp} from '../../../../actions/user';
 
 export default () => {
   const categories = [];
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(setUserIp());
-  }, [dispatch]);
 
   function handleCategory(name) {
     console.log(name);

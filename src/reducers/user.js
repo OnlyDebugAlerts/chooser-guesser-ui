@@ -1,13 +1,13 @@
-import {SET_USER_IP} from '../constants/actions';
+import {SIGN_IN} from '../constants/actions';
 
 const initialState = {
-    userIp: ''
-}
+    isAuth: false
+};
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case SET_USER_IP:
-            return { ...state, userIp: action.payload }
+        case SIGN_IN:
+            return { ...state, isAuth: action.payload }
         default:
             return state
     }

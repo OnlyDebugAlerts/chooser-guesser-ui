@@ -19,17 +19,19 @@ import MailIcon from '@material-ui/icons/Mail';
 import {useStyles} from '../ChooseGame/styles';
 import Badge from "@material-ui/core/Badge";
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
 import Button from '@material-ui/core/Button';
 import {Link, Switch, Route} from "react-router-dom";
-import SignInContainer from "../Auth/SignInContainer";
 import ChooseGame from "../ChooseGame";
+import AccountCircle from '@material-ui/icons/AccountCircle';
 
-
-export default function MiniDrawer() {
+export default function MiniDrawer(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const anchorOpen = Boolean(anchorEl);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -37,6 +39,19 @@ export default function MiniDrawer() {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const logOut = () => {
+    localStorage.removeItem('jwt');
+    props.history.push('/sign-in')
   };
 
   return (
@@ -83,13 +98,32 @@ export default function MiniDrawer() {
               </Badge>
             </IconButton>
             <IconButton
-              edge="end"
               aria-label="account of current user"
+              aria-controls="menu-appbar"
               aria-haspopup="true"
+              onClick={handleMenu}
               color="inherit"
             >
               <AccountCircle/>
             </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={anchorOpen}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose}>Profile</MenuItem>
+              <MenuItem onClick={logOut}>Log out</MenuItem>
+            </Menu>
           </div>
         </Toolbar>
       </AppBar>
